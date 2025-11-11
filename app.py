@@ -11,6 +11,7 @@ import time
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import plotly.graph_objects as go
+from tensorflow.keras.models import load_model
 
 # ----------------------------
 # Configurações iniciais
