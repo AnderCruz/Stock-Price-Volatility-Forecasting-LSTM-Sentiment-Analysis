@@ -1,0 +1,120 @@
+Ticker,Company,Sector
+AAPL,Apple Inc.,Technology
+MSFT,Microsoft Corp.,Technology
+NVDA,NVIDIA Corp.,Technology
+GOOGL,Alphabet Inc. Class A,Communication Services
+AMZN,Amazon.com Inc.,Consumer Discretionary
+TSLA,Tesla Inc.,Consumer Discretionary
+JNJ,Johnson & Johnson,Healthcare
+JPM,JP Morgan Chase & Co.,Financials
+XOM,Exxon Mobil Corp.,Energy
+KO,Coca-Cola Co.,Consumer Staples
+UNP,Union Pacific Corp.,Industrials
+F,Ford Motor Company,Consumer Discretionary
+GM,General Motors Co.,Consumer Discretionary
+PFE,Pfizer Inc.,Healthcare
+BMY,Bristol-Myers Squibb,Healthcare
+CVX,Chevron Corp.,Energy
+DIS,Walt Disney Co.,Communication Services
+NFLX,Netflix Inc.,Communication Services
+ABT,Abbott Laboratories,Healthcare
+ACN,Accenture PLC,Technology
+ADBE,Adobe Inc.,Technology
+ADP,Automatic Data Processing,Technology
+ADSK,Autodesk Inc.,Technology
+AMAT,Applied Materials,Technology
+AMD,Advanced Micro Devices,Technology
+AMGN,Amgen Inc.,Healthcare
+AON,Aon PLC,Financials
+ASML,ASML Holding,Technology
+AVGO,Broadcom Inc.,Technology
+BAC,Bank of America,Financials
+BDX,Becton Dickinson,Healthcare
+BIDU,Baidu Inc.,Communication Services
+BKNG,Booking Holdings,Consumer Discretionary
+BLK,BlackRock Inc.,Financials
+BSX,Boston Scientific,Healthcare
+C,Citigroup Inc.,Financials
+CAT,Caterpillar Inc.,Industrials
+CB,Chubb Limited,Financials
+CCI,Crown Castle International,Real Estate
+CHTR,Charter Communications,Communication Services
+CL,Colgate-Palmolive,Consumer Staples
+CMCSA,Comcast Corp.,Communication Services
+CME,CME Group Inc.,Financials
+COST,Costco Wholesale Corp.,Consumer Staples
+CRM,Salesforce Inc.,Technology
+CRWD,CrowdStrike,Technology
+CSCO,Cisco Systems,Technology
+CTAS,Cintas Corp.,Industrials
+CVS,CVS Health,Healthcare
+DHR,Danaher Corp.,Healthcare
+DE,Deere & Co.,Industrials
+DLTR,Dollar Tree Inc.,Consumer Discretionary
+DOCU,DocuSign Inc.,Technology
+DUK,Duke Energy,Utilities
+DXCM,Dexcom Inc.,Healthcare
+EA,Electronic Arts,Communication Services
+EBAY,eBay Inc.,Consumer Discretionary
+EW,Edwards Lifesciences,Healthcare
+FAST,Fastenal Co.,Industrials
+FIS,Fidelity National Information Services,Technology
+FOXA,Fox Corp. Class A,Communication Services
+GILD,Gilead Sciences,Healthcare
+GS,Goldman Sachs,Financials
+HON,Honeywell International,Industrials
+INTC,Intel Corp.,Technology
+INTU,Intuit Inc.,Technology
+ISRG,Intuitive Surgical,Healthcare
+JD,JD.com Inc.,Consumer Discretionary
+LMT,Lockheed Martin,Industrials
+LOW,Lowe's Companies,Consumer Discretionary
+MA,Mastercard Inc.,Financials
+MDT,Medtronic,Healthcare
+MET,MetLife Inc.,Financials
+META,Meta Platforms,Communication Services
+MMM,3M Co.,Industrials
+MO,Altria Group,Consumer Staples
+MRK,Merck & Co.,Healthcare
+MS,Morgan Stanley,Financials
+NEE,NextEra Energy,Utilities
+NFLX,Netflix Inc.,Communication Services
+NKE,Nike Inc.,Consumer Discretionary
+ORCL,Oracle Corp.,Technology
+PEP,PepsiCo Inc.,Consumer Staples
+PGR,Progressive Corp.,Financials
+PYPL,PayPal Holdings,Technology
+QCOM,Qualcomm Inc.,Technology
+RTX,Raytheon Technologies,Industrials
+SBUX,Starbucks Corp.,Consumer Discretionary
+SCHW,Charles Schwab Corp.,Financials
+SPGI,S&P Global Inc.,Financials
+T,AT&T Inc.,Communication Services
+TMUS,T-Mobile US,Communication Services
+TSCO,Tractor Supply Co.,Consumer Discretionary
+TXN,Texas Instruments,Technology
+UNH,UnitedHealth Group,Healthcare
+V,Visa Inc.,Financials
+VZ,Verizon Communications,Communication Services
+WFC,Wells Fargo,Financials
+WMT,Walmart Inc.,Consumer Staples
+XEL,Xcel Energy,Utilities
+^GSPC,S&P 500,Index
+^DJI,Dow Jones Industrial Average,Index
+^IXIC,NASDAQ Composite,Index
+^RUT,Russell 2000,Index
+SPY,SPDR S&P 500 ETF,Index
+QQQ,Invesco QQQ ETF,Index
+^VIX,CBOE Volatility Index,Index
+^FTSE,FTSE 100,Index
+^N225,Nikkei 225,Index
+^HSI,Hang Seng,Index
+^GDAXI,DAX,Index
+^FCHI,CAC 40,Index
+^BSESN,BSE Sensex,Index
+^BVSP,Bovespa,Index
+^TNX,US 10Y Treasury Yield,Index
+^IRX,US 3M Treasury Bill Rate,Index
+^CRB,CRB Commodity Index,Index
+^XLE,Energy Select Sector SPDR,Index
+^XLK,Technology Select Sector SPDR,Index
