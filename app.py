@@ -227,7 +227,7 @@ class StockForecaster:
 
         # Métricas (baseadas no X_test)
         mae = mean_absolute_error(inv_real_test, inv_pred_test)
-        rmse_val = mean_squared_error(inv_real_test, inv_pred_test, squared=False)
+        rmse_val = np.sqrt(mean_squared_error(inv_real_test, inv_pred_test))
         # MAPE: cuidado com divisão por zero
         denom = np.where(inv_real_test == 0, 1e-8, inv_real_test)
         mape = np.mean(np.abs((inv_real_test - inv_pred_test) / denom)) * 100
@@ -434,3 +434,4 @@ if predict_button and ticker:
 # Rodapé
 st.markdown("---")
 st.markdown("🔮 *Previsões geradas por modelo de IA - Use para análise apenas. Não constitui aconselhamento financeiro.*")
+
