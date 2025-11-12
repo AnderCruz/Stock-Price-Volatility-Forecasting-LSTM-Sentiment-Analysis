@@ -127,7 +127,6 @@ class StockForecaster:
 
         st.success("✅ Scaler e Model Info carregados com sucesso (quando disponível).")
 
-    @st.cache_data(show_spinner=False)
     def download_stock_data(self, ticker):
         """
         Baixa dados históricos via yfinance e prepara colunas: Price, Volume, Sentiment.
