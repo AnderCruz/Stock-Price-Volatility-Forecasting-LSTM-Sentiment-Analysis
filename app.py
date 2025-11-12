@@ -14,6 +14,15 @@ import plotly.graph_objects as go
 from tensorflow.keras.models import load_model
 from datetime import timedelta
 
+import keras
+import tensorflow as tf
+from keras import backend as K
+
+@keras.saving.register_keras_serializable(package="Custom")
+def rmse(y_true, y_pred):
+    return K.sqrt(K.mean(K.square(y_pred - y_true)))
+
+
 # ----------------------------
 # Configurações iniciais
 # ----------------------------
@@ -90,7 +99,7 @@ class StockForecaster:
         try:
             if not os.path.exists(self.model_file):
                 raise FileNotFoundError(f"Arquivo do modelo não encontrado em: {self.model_file}")
-            self.model = load_model(self.model_file)
+            self.model = load_model(self.model_file, custom_objects={"rmse": rmse})
             st.success("✅ Modelo LSTM carregado com sucesso!")
         except Exception as e:
             st.error(f"Erro ao carregar modelo: {e}")
