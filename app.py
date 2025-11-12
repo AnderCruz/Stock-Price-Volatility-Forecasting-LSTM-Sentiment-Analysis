@@ -1,4 +1,3 @@
-# app.py - VERSÃO FINAL SUPER ESTÁVEL (tudo em um arquivo)
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -18,9 +17,22 @@ import keras
 import tensorflow as tf
 from keras import backend as K
 
+
 @keras.saving.register_keras_serializable(package="Custom")
 def rmse(y_true, y_pred):
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
+
+
+# ----------------------------
+# Helper cached function (fora da classe)
+# ----------------------------
+@st.cache_data(show_spinner=False)
+def cached_yf_download(ticker: str, period: str = "max") -> pd.DataFrame:
+    """Baixa dados via yfinance com cache (função fora da classe para evitar problemas de hashing)."""
+    raw = yf.download(ticker, period=period, progress=False)
+    if raw is None:
+        return pd.DataFrame()
+    return raw
 
 
 # ----------------------------
@@ -51,6 +63,7 @@ st.markdown("""
 
 st.markdown('<h1 class="main-header">🤖 Previsão de Ações com IA (VERSÃO ESTÁVEL)</h1>', unsafe_allow_html=True)
 st.markdown("### Previsão dos próximos 10 dias usando modelo treinado (LSTM) — use apenas para análise, não é recomendação financeira.")
+
 
 # ----------------------------
 # StockForecaster - manager
@@ -99,7 +112,8 @@ class StockForecaster:
         try:
             if not os.path.exists(self.model_file):
                 raise FileNotFoundError(f"Arquivo do modelo não encontrado em: {self.model_file}")
-            self.model = load_model(self.model_file)
+            # tenta carregar respeitando a função rmse registrada
+            self.model = load_model(self.model_file, compile=False)
             st.success("✅ Modelo LSTM carregado com sucesso!")
         except Exception as e:
             st.error(f"Erro ao carregar modelo: {e}")
@@ -130,11 +144,11 @@ class StockForecaster:
     def download_stock_data(self, ticker):
         """
         Baixa dados históricos via yfinance e prepara colunas: Price, Volume, Sentiment.
-        Se Volume/Sentiment não existirem no dataset, criamos valores default.
+        Essa função **não** tem cache (o cache foi movido para cached_yf_download fora da classe).
         """
         # Baixa máximo histórico para garantir sequência suficiente
         try:
-            raw = yf.download(ticker, period="max", progress=False)
+            raw = cached_yf_download(ticker)
         except Exception as e:
             raise RuntimeError(f"Erro ao baixar dados do ticker {ticker}: {e}")
 
@@ -213,15 +227,12 @@ class StockForecaster:
 
         # Métricas (baseadas no X_test)
         mae = mean_absolute_error(inv_real_test, inv_pred_test)
-        rmse = mean_squared_error(inv_real_test, inv_pred_test, squared=False)
+        rmse_val = mean_squared_error(inv_real_test, inv_pred_test, squared=False)
         # MAPE: cuidado com divisão por zero
         denom = np.where(inv_real_test == 0, 1e-8, inv_real_test)
         mape = np.mean(np.abs((inv_real_test - inv_pred_test) / denom)) * 100
 
         # Direction accuracy (previsão do sinal do movimento de um dia para o outro)
-        # comparamos inv_pred_test[i] - inv_real_test[i-1] com inv_real_test[i] - inv_real_test[i-1]
-        # mas como temos apenas previsões para os instantes correspondentes, vamos comparar sinais das variações day-over-day
-        # Construímos série com base no preço verdadeiro (inv_real_test) e nas previsões (inv_pred_test)
         if len(inv_real_test) >= 2:
             real_diff = np.diff(inv_real_test)
             pred_diff = np.diff(inv_pred_test)
@@ -245,7 +256,6 @@ class StockForecaster:
             seq = np.vstack([seq[1:], new_row])
 
         # Inverte escala das previsões futuras
-        # Recriamos matriz com 3 colunas para o scaler
         future_other = np.tile(last_seq[-1, 1:], (days, 1))  # mantém Volume/Sentiment do último passo
         inv_future = self.scaler.inverse_transform(np.hstack([np.array(future_scaled).reshape(-1,1), future_other]))[:, 0]
 
@@ -264,12 +274,13 @@ class StockForecaster:
 
         metrics = {
             "MAE": float(np.round(mae, 4)),
-            "RMSE": float(np.round(rmse, 4)),
+            "RMSE": float(np.round(rmse_val, 4)),
             "MAPE": float(np.round(mape, 4)),
             "Direction_Accuracy": None if direction_acc is None else float(np.round(direction_acc, 2))
         }
 
         return pred_df, df, metrics
+
 
 # ----------------------------
 # UI - Sidebar
@@ -298,6 +309,7 @@ st.sidebar.markdown("""
 - PETR4.SA, VALE3.SA
 - ITUB4.SA, BBDC4.SA
 """)
+
 
 # ----------------------------
 # Processamento principal
